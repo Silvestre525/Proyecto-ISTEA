@@ -1,0 +1,17 @@
+.lista-articulos{
+
+    color:violet;
+
+}
+
+#formulario1{
+    text-align: center;
+}
+
+div p{
+    background-color: red;
+}
+
+div > p {
+    font-size: large;
+}
