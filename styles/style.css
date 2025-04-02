@@ -1,3 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body{
+    background-color: black;
+}
+
+header{
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+}
+
+nav{
+    display: flex;
+     gap: 15px;
+}
+
+nav a{
+    text-decoration: none;
+    color: black;
+}
+nav a:hover{
+    color: red;
+}
+
+
 .lista-articulos{
 
     color:violet;
