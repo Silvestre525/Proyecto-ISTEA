@@ -12,39 +12,30 @@ body{
 header{
     background-color: white;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 7px;
 }
 
 nav{
     display: flex;
-     gap: 15px;
+    flex-direction: row;
+    gap: 15px;
+    a{
+        text-decoration: none;
+        color: black;
+        font-weight: bold;  /*para poner la letra n negrita*/
+    }
 }
 
-nav a{
-    text-decoration: none;
-    color: black;
-}
 nav a:hover{
     color: red;
 }
 
-
-.lista-articulos{
-
-    color:violet;
-
+.logo{
+    display: flex;
 }
-
-#formulario1{
-    text-align: center;
-}
-
-div p{
-    background-color: red;
-}
-
-div > p {
-    font-size: large;
+.logo img{
+    height: 80px;
+    border-radius: 25%;
 }
