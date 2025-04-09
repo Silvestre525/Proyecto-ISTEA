@@ -10,11 +10,11 @@ body{
 }
 
 header{
-    background-color: white;
+    background-color: #FFFAF0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 110px;   padding: 7px 10%;
+    height: 110px;   padding: 7px 2%;
 }
 
 /*Navbar*/
@@ -44,7 +44,7 @@ header{
     cursor: pointer;
 }
 .logo img{
-    height: 110px;
+    height: 105px;
     width: auto;
     transition: all 0.3s;
 }
