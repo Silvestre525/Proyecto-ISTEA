@@ -14,28 +14,40 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 7px;
+    height: 110px;   padding: 7px 10%;
 }
 
-nav{
+/*Navbar*/
+.navbar{
     display: flex;
     flex-direction: row;
     gap: 15px;
     a{
         text-decoration: none;
+        font-size: 20px;
         color: black;
         font-weight: bold;  /*para poner la letra n negrita*/
+        transition: all 0.3s;
     }
 }
 
-nav a:hover{
+.navbar a:hover{
     color: red;
+    text-decoration: underline;
+    transform: scale(1.1);
 }
 
+
+/*Logo*/
 .logo{
     display: flex;
+    cursor: pointer;
 }
 .logo img{
-    height: 80px;
-    border-radius: 25%;
+    height: 110px;
+    width: auto;
+    transition: all 0.3s;
+}
+.logo img:hover{
+    transform: scale(1.1);
 }
