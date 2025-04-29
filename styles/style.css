@@ -185,7 +185,7 @@ header{
 }
 
 .product-item__info i {
-    color: #4CAF50;
+    color: #222;
     margin-right: 10px;
     font-size: 18px;
 }
@@ -222,7 +222,7 @@ header{
 }
 
 .buy-button {
-    background-color: #4CAF50;
+    background-color: red;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -237,7 +237,7 @@ header{
 }
 
 .buy-button:hover {
-    background-color: #45a049;
+    background-color: #222;
     transform: scale(1.03);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
