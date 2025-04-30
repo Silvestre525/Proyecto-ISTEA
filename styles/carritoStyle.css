@@ -1,4 +1,25 @@
 /*cartstyles*/
+.cart-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 30px;
+}
+
+.cart-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Cart Content */
+.cart-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+
 .cart-item{
     background-color: #fff;
     border-radius: 10px;
@@ -28,3 +49,6 @@
 .cart-item__img img:hover {
     transform: scale(1.05);
 }
+
+
+
