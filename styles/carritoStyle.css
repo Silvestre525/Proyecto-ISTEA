@@ -1,15 +1,7 @@
 /*cartstyles*/
 
 
-.container-items {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    padding: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+
 .cart-container {
     max-width: 1200px;
     margin: 30px auto;
@@ -28,6 +20,12 @@
     grid-template-columns: 2fr 1fr;
     gap: 30px;
 }
+.container-items{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .cart-item{
     background-color: #fff;
     border-radius: 10px;
@@ -42,8 +40,6 @@
 
 .cart-item__img{
     flex: 0 0 150px;
-    overflow: hidden;
-    position: relative;
 }
 
 .cart-item__img img {
@@ -51,12 +47,8 @@
     height: 150px;
     object-fit: cover;
     border-radius: 5px;
-    transition: transform 0.5s ease;
 }
 
-.cart-item__img img:hover {
-    transform: scale(1.05);
-}
 
 .cart-item__details {
     flex: 1;
@@ -116,4 +108,58 @@
 .remove-button:hover {
     background-color: #222;
     transform: scale(1.03);
+}
+
+.cart-summary {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: fit-content;
+}
+
+.cart-summary h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.summary-details {
+    margin-bottom: 20px;
+}
+
+.summary-details p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.summary-details .total {
+    font-size: 18px;
+    font-weight: bold;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.checkout-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.checkout-button:hover {
+    background-color: #222;
+    transform: scale(1.03);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
