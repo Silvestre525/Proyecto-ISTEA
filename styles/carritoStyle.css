@@ -1,4 +1,15 @@
 /*cartstyles*/
+
+
+.container-items {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 .cart-container {
     max-width: 1200px;
     margin: 30px auto;
@@ -12,19 +23,11 @@
     text-align: center;
 }
 
-/* Cart Content */
 .cart-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 30px;
 }
-
-.container-items {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 .cart-item{
     background-color: #fff;
     border-radius: 10px;
