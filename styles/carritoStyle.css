@@ -94,3 +94,23 @@
     border-radius: 5px;
     font-size: 16px;
 }
+
+.remove-button {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: fit-content
+}
+
+.remove-button:hover {
+    background-color: #222;
+    transform: scale(1.03);
+}
