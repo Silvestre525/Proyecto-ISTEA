@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/contactStyle.css">
     <title>Document</title>
 </head>
 <body>
@@ -25,6 +26,29 @@
             <a href="/views/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
         </nav>
     </header>
+    <main>
+        <h2>Contacto</h2>
+            <div class="contact-content">
+                <form action="#" method="post" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre" aria-label="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="info@tiendaropa.com" aria-label="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Asunto:</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Motivo del contacto" aria-label="Asunto">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje:</label>
+                        <textarea id="message" name="message" required placeholder="Escribe tu mensaje..." rows="5" aria-label="Mensaje"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar Mensaje</button>
+                </form>
+    </main>
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
