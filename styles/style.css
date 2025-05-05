@@ -497,3 +497,25 @@ header{
     }
 }
 
+
+.add-to-cart-button {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-to-cart-button:hover {
+    background-color: #222;
+    transform: scale(1.03);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
