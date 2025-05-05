@@ -39,6 +39,36 @@ header{
     transform: scale(1.1);
 }
 
+.search-bar {
+    margin-left: 15px;
+    background-color: #FFFAF0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.search-bar input {
+    border: none;
+    padding: 5px 10px;
+    outline: none;
+    background-color: transparent;
+    color: #000;
+    font-size: 14px;
+}
+
+.search-bar button {
+    background-color: red;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.search-bar button:hover {
+    background-color: #000;
+}
+
+
 /* Hamburger Menu */
 .menu-toggle {
     display: none;
