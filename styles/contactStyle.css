@@ -230,6 +230,26 @@ header{
     }
 }
 
+@media (max-width: 900px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+        margin-top: 20px;
+    }
+}
+@media (max-width: 600px) {
+    .contact-container {
+        padding: 0 15px;
+    }
+
+    .contact-form,
+    .contact-info {
+        padding: 15px;
+    }
+}
+
 
 
 
