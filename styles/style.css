@@ -519,3 +519,28 @@ header{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+@media (max-width: 900px) {
+    .product-detail-content {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .product-detail-container {
+        padding: 0 15px;
+    }
+
+    .product-image,
+    .product-info {
+        padding: 15px;
+    }
+
+    .thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+}
