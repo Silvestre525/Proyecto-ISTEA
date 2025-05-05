@@ -458,3 +458,21 @@ header{
         margin-bottom: 15px;
     }
 }
+
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.product-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.product-options {
+    margin-bottom: 20px;
+}
