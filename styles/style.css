@@ -476,3 +476,24 @@ header{
 .product-options {
     margin-bottom: 20px;
 }
+
+.option-group {
+    margin-bottom: 15px;
+
+    label {
+        display: block;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    select,input{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+}
+
