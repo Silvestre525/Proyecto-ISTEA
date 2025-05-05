@@ -162,7 +162,26 @@ header{
     padding: 25px;
 }
 
+.form-group {
+    margin-bottom: 20px;
 
+    label{
+        display: block;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    min-height: 100px;
+}
 
 /* Footer*/
 .footer {
