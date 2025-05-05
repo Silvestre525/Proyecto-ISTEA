@@ -391,3 +391,18 @@ header{
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Detail product */
+.product-detail-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 30px;
+}
+
+.product-detail-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
