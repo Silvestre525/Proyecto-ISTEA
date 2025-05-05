@@ -400,9 +400,24 @@ header{
     padding: 0 30px;
 }
 
-.product-detail-container h2 {
+.product-detail-container h2 { 
     font-size: 28px;
     color: #333;
     margin-bottom: 20px;
     text-align: center;
+}
+
+.product-detail-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+
+.product-image {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
 }
