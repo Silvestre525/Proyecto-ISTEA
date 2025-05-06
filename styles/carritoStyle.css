@@ -176,30 +176,36 @@ header{
 
 .cart-item{
     background-color: #fff;
-    width: 15rem;
-    height: 23rem;
-    border-radius: 10px;
+    border-radius: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 .cart-item:hover{
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-
-.cart-item__img:hover{
-    transition: transform 0.3s ease;
-    transform: scale(1.05);
+.cart-item__img{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
 }
 
 .cart-item__img img {
-    width: 15rem;
-    height: 10rem;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 5px;;
+    transition: var(--transition);
 }
+
+.cart-item__img:hover img {
+    transform: scale(1.05);
+}
+
+
 
 
 .cart-item__details {
