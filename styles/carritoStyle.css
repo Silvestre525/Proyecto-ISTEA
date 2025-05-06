@@ -150,26 +150,28 @@ header{
 
 .cart-container {
     max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 30px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+
 }
 
 .cart-container h2 {
-    font-size: 28px;
+    font-size: 2rem;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
 .cart-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    gap: 2rem;
 }
 .container-items{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1,5rem;
 }
 
 .cart-item{
