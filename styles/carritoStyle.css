@@ -319,7 +319,16 @@ header{
     transform: scale(1.03);
 }
 
-
+@media (max-width: 480px) {
+    .cart-container {
+        padding: 0 1rem;
+    }
+    
+    .cart-item__details {
+        padding: 1rem;
+    }
+    
+}
 
 
 
