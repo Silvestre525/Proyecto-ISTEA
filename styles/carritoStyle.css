@@ -242,59 +242,60 @@ header{
 
 
 
-
-
 .remove-button {
     background-color: #ff4757;
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     display: flex;
     align-items: center;
-    gap: 5px;
-    width: fit-content
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .remove-button:hover {
     background-color: #222;
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 .cart-summary {
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 1.5rem;
     height: fit-content;
+    position: sticky;
+    top: 6rem;
 }
 
 .cart-summary h3 {
-    font-size: 20px;
+    font-size: 1.5rem;
     color: #333;
     margin-bottom: 20px;
 }
 
 .summary-details {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
 .summary-details p {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 1.1rem;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 .summary-details .total {
-    font-size: 18px;
+    font-size: 1.5rem;
     font-weight: bold;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
+    border-top: 2px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
 }
 
 .checkout-button {
