@@ -119,18 +119,6 @@ header{
         font-size: 24px;
     }
     
-    /* Hamburger animation for active state */
-    .menu-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    
-    .menu-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .menu-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
 }
 
 @media (max-width: 480px) {
