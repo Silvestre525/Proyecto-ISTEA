@@ -28,65 +28,28 @@
             <a href="">Hombres</a>
             <a href="">Mujeres</a>
             <a href="">Marcas</a>
-            <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/views/carrito.html" class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </a>
         </nav>
     </header>
     <main>
-        <section class = "cart-container">
+        <section class="cart-container">
             <h2>Carrito de compras</h2>
-            <div class = "cart-content">
-                <div class="container-items">
-                    <article class = "cart-item">
-                        <figure class="cart-item__img">
-                            <img src="/img/Remera1.jpg" alt="imagen">
-                        </figure>
-                        <div class="cart-item__details">
-                            <h3>Remera oversize negra</h3>
-                            <p class="cart-item__price">$20.000</p>
-                            <div class="cart-item__quantity">
-                                <label for="quantity1">Cantidad:</label>
-                                <input type="number" id="quantity1" value="1" min="1">
-                            </div>
-                            <button class="remove-button"><i class="fa-solid fa-trash"></i> Eliminar</button>
-                        </div>
-                    </article>
-                    <article class="cart-item">
-                        <figure class="cart-item__img">
-                            <img src="/img/abrigo1.jpg" alt="producto">
-                        </figure>
-                        <div class="cart-item__details">
-                            <h3>Campera nike negra</h3>
-                            <p class="cart-item__price">$80.000</p>
-                            <div class="cart-item__quantity">
-                                <label for="quantity2">Cantidad:</label>
-                                <input type="number" id="quantity2" value="1" min="1">
-                            </div>
-                            <button class="remove-button"><i class="fa-solid fa-trash"></i> Eliminar</button>
-                        </div>
-                    </article>
-                    <article class="cart-item">
-                        <figure class="cart-item__img">
-                            <img src="/img/Remera4.jpg" alt="producto">
-                        </figure>
-                        <div class="cart-item__details">
-                            <h3>Remera rayada</h3>
-                            <p class="cart-item__price">$70.000</p>
-                            <div class="cart-item__quantity">
-                                <label for="quantity2">Cantidad:</label>
-                                <input type="number" id="quantity3" value="1" min="1">
-                            </div>
-                            <button class="remove-button"><i class="fa-solid fa-trash"></i> Eliminar</button>
-                        </div>
-                    </article>
+            <div class="cart-content">
+                <div class="container-items" id="cart-items">
+                    <!-- Los items del carrito se cargarán dinámicamente aquí -->
                 </div>
                 <div class="cart-summary">
                     <h3>Resumen del Pedido</h3>
                     <div class="summary-details">
-                        <p>Subtotal: <span>$170.000</span></p>
+                        <p>Subtotal: <span id="subtotal">$0</span></p>
                         <p>Envío: <span>Gratis</span></p>
-                        <p class="total">Total: <span>$170.000</span></p>
+                        <p class="total">Total: <span id="total">$0</span></p>
                     </div>
-                    <button class="checkout-button">Proceder al Pago</button>
+                    <button class="checkout-button" id="checkout-button">Proceder al Pago</button>
+                    <button class="clear-cart-button" id="clear-cart">Vaciar Carrito</button>
                 </div>
             </div>
         </section>
@@ -125,5 +88,9 @@
             <p>© 2025 Tienda de Ropa. Todos los derechos reservados.</p>
         </div>
     </footer>
+    <script src="/script/app.js"></script>
+    <script src="/script/carrito.js"></script>
+    <script src="/script/carritoVista.js"></script>
 </body>
+</html>
 
