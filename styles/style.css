@@ -21,6 +21,7 @@ header{
 /*Navbar*/
 .navbar{
     display: flex;
+    position: sticky;
     gap: 15px;
     a{
         text-decoration: none;
@@ -39,49 +40,51 @@ header{
 }
 
 .search-bar {
-    margin-left: 15px;
-    background-color: #FFFAF0;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
 }
 
 .search-bar input {
-    border: none;
-    padding: 5px 10px;
-    outline: none;
-    background-color: transparent;
-    color: #000;
-    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 5px;
+    width: 200px;
 }
 
 .search-bar button {
-    background-color: red;
+    background-color: #FF0000;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 12px;
     cursor: pointer;
     color: #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-bar button:hover {
-    background-color: #000;
+    background-color: #cc0000;
 }
-
 
 /* Hamburger Menu */
 .menu-toggle {
     display: none;
     cursor: pointer;
-    z-index: 999;
+    padding: 10px;
+    z-index: 1001;
+    position: relative;
 }
 
-.menu-toggle .bar {
+.bar {
     display: block;
     width: 25px;
     height: 3px;
     margin: 5px auto;
     background-color: #333;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
 }
 
 /* Responsive Header */
@@ -94,20 +97,32 @@ header{
         display: block;
     }
     
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
     .navbar {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
+        width: 80%;
+        max-width: 300px;
         height: 100vh;
-        background-color: #FFFAF0;
+        background-color: #fff;
+        padding: 80px 20px 20px;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        transition: right 0.5s ease;
-        z-index: 998;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        align-items: flex-start;
+        z-index: 1000;
     }
     
     .navbar.active {
@@ -115,9 +130,65 @@ header{
     }
     
     .navbar a {
-        font-size: 24px;
+        margin: 10px 0;
+        width: 100%;
+        text-align: left;
+        position: relative;
+        z-index: 1002;
     }
     
+    .search-bar {
+        width: 100%;
+        margin: 10px 0;
+        position: relative;
+        z-index: 1002;
+        display: flex;
+        align-items: center;
+    }
+    
+    .search-bar input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 5px;
+        font-size: 16px;
+    }
+    
+    .search-bar button {
+        padding: 10px;
+        background-color: #FF0000;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+    }
+    
+    .search-bar button:hover {
+        background-color: #cc0000;
+    }
+    
+    .search-bar button i {
+        font-size: 18px;
+    }
+    
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    body.menu-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
 }
 
 @media (max-width: 480px) {
@@ -539,5 +610,136 @@ header{
     .thumbnail {
         width: 60px;
         height: 60px;
+    }
+}
+
+.banner {
+    width: 100%;
+    height: 400px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, #9f9daa);
+}
+
+.banner-content {
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.banner-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.banner-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.banner-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.banner-button:hover {
+    background-color: #000000;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .banner {
+        height: 300px;
+    }
+
+    .banner-content h1 {
+        font-size: 2rem;
+    }
+
+    .banner-content p {
+        font-size: 1.2rem;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilos para el contador del carrito */
+.cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #FF0000;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cart-count:not(:empty) {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para las notificaciones */
+.notificacion {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
