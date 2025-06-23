@@ -73,18 +73,16 @@ header{
 .menu-toggle {
     display: none;
     cursor: pointer;
-    padding: 10px;
-    z-index: 1001;
-    position: relative;
+    z-index: 999;
 }
 
-.bar {
+.menu-toggle .bar {
     display: block;
     width: 25px;
     height: 3px;
     margin: 5px auto;
     background-color: #333;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 /* Responsive Header */
@@ -113,16 +111,16 @@ header{
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
-        max-width: 300px;
+        width: 70%;
         height: 100vh;
-        background-color: #fff;
-        padding: 80px 20px 20px;
-        transition: right 0.3s ease;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        background-color: #FFFAF0;
         flex-direction: column;
-        align-items: flex-start;
-        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: right 0.5s ease;
+        z-index: 998;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     }
     
     .navbar.active {
@@ -130,11 +128,7 @@ header{
     }
     
     .navbar a {
-        margin: 10px 0;
-        width: 100%;
-        text-align: left;
-        position: relative;
-        z-index: 1002;
+        font-size: 24px;
     }
     
     .search-bar {
