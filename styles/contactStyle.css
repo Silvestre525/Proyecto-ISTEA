@@ -66,6 +66,7 @@ header{
 .search-bar button:hover {
     background-color: #000;
 }
+
 /* Hamburger Menu */
 .menu-toggle {
     display: none;
@@ -92,6 +93,16 @@ header{
         display: block;
     }
     
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
     .navbar {
         position: fixed;
         top: 0;
@@ -116,6 +127,54 @@ header{
         font-size: 24px;
     }
     
+    .search-bar {
+        width: 100%;
+        margin: 10px 0;
+        position: relative;
+        z-index: 1002;
+        display: flex;
+        align-items: center;
+    }
+    
+    .search-bar input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 5px;
+        font-size: 16px;
+    }
+    
+    .search-bar button {
+        padding: 10px;
+        background-color: #FF0000;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+    }
+    
+    .search-bar button:hover {
+        background-color: #cc0000;
+    }
+    
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    body.menu-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
 }
 
 @media (max-width: 480px) {

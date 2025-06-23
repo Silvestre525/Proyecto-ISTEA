@@ -40,33 +40,32 @@ header{
 }
 
 .search-bar {
-    display: flex;
-    align-items: center;
-    margin: 0 20px;
+    margin-left: 15px;
+    background-color: #FFFAF0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #ccc;
 }
 
 .search-bar input {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 5px;
-    width: 200px;
+    border: none;
+    padding: 5px 10px;
+    outline: none;
+    background-color: transparent;
+    color: #000;
+    font-size: 14px;
 }
 
 .search-bar button {
-    background-color: #FF0000;
+    background-color: red;
     border: none;
-    padding: 8px 12px;
+    padding: 5px 10px;
     cursor: pointer;
     color: #fff;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .search-bar button:hover {
-    background-color: #cc0000;
+    background-color: #000;
 }
 
 /* Hamburger Menu */
