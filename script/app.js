@@ -18,7 +18,34 @@ async function obtenerProductos() {
         imagen: r.fields.imagen
     }));
 }
+async function agregarProducto(producto) {
+    await fetch(AIRTABLE_URL, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${API_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ fields: producto })
+    });
+}
 
+async function editarProducto(id, producto) {
+    await fetch(`${AIRTABLE_URL}/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${API_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ fields: producto })
+    });
+}
+
+async function eliminarProducto(id) {
+    await fetch(`${AIRTABLE_URL}/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${API_TOKEN}` }
+    });
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
