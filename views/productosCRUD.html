@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Productos</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Gestión de Productos</h1>
+        <a href="index.html">Volver al inicio</a>
+    </header>
+    <main>
+        <section>
+            <h2>Agregar / Editar Producto</h2>
+            <form id="producto-form">
+                <input type="hidden" id="producto-id">
+                <label>Nombre: <input type="text" id="nombre" required></label><br>
+                <label>Precio: <input type="number" id="precio" required></label><br>
+                <label>Imagen (URL): <input type="text" id="imagen" required></label><br>
+                <button type="submit">Guardar</button>
+                <button type="button" id="cancelar-edicion" style="display:none;">Cancelar</button>
+            </form>
+        </section>
+        <section>
+            <h2>Lista de Productos</h2>
+            <table id="productos-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Productos aquí -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script src="/script/app.js"></script>
+</body>
+</html> 
