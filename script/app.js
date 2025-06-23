@@ -1,8 +1,9 @@
-const element = document.getElementById('logo');
-console.log(element);
+const API_TOKEN = 'patlCnX4M6N6adPnA.f5074edab18d8cf1bf0b3ddd4648cac32e319d82eba09f6f0acd9bf1361cbd83';
+const BASE_ID = "appZVW6eRfY4K1wZZ";
+const TABLE_NAME = "Products";
+const URL = `https://api.airtable.com/${BASE_ID}/${TABLE_NAME}`;
 
-const elemnt1 = document.querySelector('#logo');
-console.log(elemnt1);
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.getElementById('mobile-menu');
