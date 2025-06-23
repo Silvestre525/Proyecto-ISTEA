@@ -1,36 +1,42 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f7f7f7;
+    background: #9f9daa;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background: #222;
-    color: #fff;
+    background: #FFFAF0;
+    color: #222;
     padding: 1.5rem 0.5rem 1rem 0.5rem;
     text-align: center;
     margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 header a {
-    color: #fff;
+    color: #222;
     text-decoration: underline;
     font-size: 1rem;
     margin-top: 0.5rem;
     display: inline-block;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+header a:hover {
+    color: red;
 }
 
 main {
     max-width: 700px;
     margin: 0 auto;
-    background: #fff;
+    background: #fffaf0;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     padding: 2rem;
 }
 
 h2 {
-    color: #333;
+    color: #222;
     margin-top: 1.5rem;
 }
 
@@ -42,7 +48,7 @@ h2 {
 }
 #producto-form label {
     font-weight: 500;
-    color: #444;
+    color: #222;
 }
 #producto-form input[type="text"],
 #producto-form input[type="number"] {
@@ -51,6 +57,8 @@ h2 {
     border-radius: 5px;
     font-size: 1rem;
     margin-left: 0.5rem;
+    background: #fff;
+    color: #222;
 }
 #producto-form button {
     width: fit-content;
@@ -63,17 +71,18 @@ h2 {
     cursor: pointer;
     margin-top: 0.5rem;
     margin-right: 0.5rem;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 #producto-form button:hover {
-    background: #444;
+    background: red;
+    color: #fff;
 }
 
 #productos-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
-    background: #fafafa;
+    background: #fff;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
@@ -83,8 +92,8 @@ h2 {
     text-align: left;
 }
 #productos-table th {
-    background: #222;
-    color: #fff;
+    background: #FFFAF0;
+    color: #222;
     font-weight: 600;
 }
 #productos-table tr:nth-child(even) {
@@ -102,21 +111,23 @@ h2 {
     border-radius: 4px;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 #productos-table .editar {
-    background: #007bff;
+    background: #222;
     color: #fff;
 }
 #productos-table .editar:hover {
-    background: #0056b3;
+    background: red;
+    color: #fff;
 }
 #productos-table .eliminar {
-    background: #dc3545;
+    background: red;
     color: #fff;
 }
 #productos-table .eliminar:hover {
-    background: #a71d2a;
+    background: #222;
+    color: #fff;
 }
 @media (max-width: 600px) {
     main {
