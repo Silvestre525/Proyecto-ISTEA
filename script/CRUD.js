@@ -164,3 +164,27 @@ function mostrarProductos(productos) {
         productosTbody.appendChild(row);
     });
 }
+
+function editarProducto(id, nombre, precio, imagen) {
+    editandoId = id;
+    
+    document.getElementById('nombre').value = nombre;
+    document.getElementById('precio').value = precio;
+    document.getElementById('imagen').value = imagen;
+    
+    formTitle.textContent = 'Editar Producto';
+    submitBtn.textContent = 'Actualizar Producto';
+    cancelarBtn.style.display = 'inline-block';
+}
+
+async function eliminarProductoConfirmado(id) {
+    if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+        try {
+            await eliminarProducto(id);
+            mostrarMensaje('Producto eliminado con éxito', 'success');
+            cargarProductos();
+        } catch (error) {
+            mostrarMensaje('Error al eliminar: ' + error.message, 'error');
+        }
+    }
+}
