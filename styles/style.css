@@ -800,3 +800,27 @@ html {
         font-size: 1rem;
     }
 }
+
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1001;
+    background-color: #FFFAF0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s;
+}
+
+body.index-fixed-header {
+    padding-top: 110px;
+}
+
+@media (max-width: 768px) {
+    .header-fixed {
+        height: 90px;
+    }
+    body.index-fixed-header {
+        padding-top: 90px;
+    }
+}
