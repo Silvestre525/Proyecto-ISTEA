@@ -8,7 +8,7 @@ const mensaje = document.getElementById('mensaje');
 const productosTbody = document.getElementById('productos-tbody');
 const formTitle = document.getElementById('form-title');
 const submitBtn = document.getElementById('submit-btn');
-const cancelarBtn = document.getElementById('cancelar-edicion');
+const cancelarBtn = document.getElementById('cancelar-btn');
 
 let editandoId = null;
 
