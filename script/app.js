@@ -84,6 +84,8 @@ async function cargarProductos() {
 }
 
 function mostrarProductos(productos) {
+    if (!productosContainer) return;
+    
     productosContainer.innerHTML = '';
     
     if (productos.length === 0) {
@@ -98,7 +100,7 @@ function mostrarProductos(productos) {
     
     productos.forEach(producto => {
         const productoHTML = `
-            <article class="product-item">
+            <article class="product-item" onclick="irADetalle('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')">
                 <figure class="product-item__img">
                     <img src="${producto.fields.image || '/img/Defecto.webp'}" 
                          alt="${producto.fields.name || 'Producto'}"
@@ -113,7 +115,7 @@ function mostrarProductos(productos) {
                     <h3>${producto.fields.name || 'Sin nombre'}</h3>
                 </div>
                 <div class="product-item__button">
-                    <button class="buy-button" onclick="agregarAlCarrito('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')">
+                    <button class="buy-button" onclick="event.stopPropagation(); agregarAlCarrito('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')">
                         Agregar al carrito
                     </button>
                 </div>
@@ -122,6 +124,19 @@ function mostrarProductos(productos) {
         
         productosContainer.innerHTML += productoHTML;
     });
+}
+
+function irADetalle(id, nombre, precio, imagen) {
+    
+    const params = new URLSearchParams({
+        id: id,
+        name: nombre,
+        price: precio,
+        image: imagen
+    });
+    
+    // Redirigir a la página de detalles
+    window.location.href = `/views/detalle.html?${params.toString()}`;
 }
 
 function mostrarProductosVacios() {
