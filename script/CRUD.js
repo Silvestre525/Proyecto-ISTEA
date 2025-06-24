@@ -86,3 +86,34 @@ async function obtenerProductos() {
     const data = await response.json();
     return data.records || [];
 }
+async function actualizarProducto(id, producto) {
+    const response = await fetch(`${AIRTABLE_URL}/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${API_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(producto)
+    });
+    
+    if (!response.ok) {
+        throw new Error('Error al actualizar producto');
+    }
+    
+    return await response.json();
+}
+
+async function eliminarProducto(id) {
+    const response = await fetch(`${AIRTABLE_URL}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${API_TOKEN}`
+        }
+    });
+    
+    if (!response.ok) {
+        throw new Error('Error al eliminar producto');
+    }
+    
+    return true;
+}
