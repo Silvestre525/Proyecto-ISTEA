@@ -68,3 +68,55 @@ function configurarBotonCarrito() {
         });
     }
 }
+
+function agregarAlCarritoDesdeDetalle(quantity) {
+    if (!window.currentProduct) {
+        alert('Error: No se pudo obtener la información del producto');
+        return;
+    }
+
+    const producto = {
+        id: window.currentProduct.id,
+        name: window.currentProduct.name,
+        price: window.currentProduct.price,
+        image: window.currentProduct.image,
+        quantity: quantity
+    };
+
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
+    const productoExistente = carrito.find(item => item.id === producto.id);
+    
+    if (productoExistente) {
+        productoExistente.quantity += quantity;
+    } else {
+        carrito.push(producto);
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    mostrarNotificacion('Producto agregado al carrito');
+}
+
+
+
+function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const totalItems = carrito.reduce((total, item) => total + item.quantity, 0);
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        cartCount.textContent = totalItems;
+    }
+}
+
+function mostrarNotificacion(mensaje) {
+    const notificacion = document.createElement('div');
+    notificacion.className = 'notificacion';
+    notificacion.textContent = mensaje;
+    document.body.appendChild(notificacion);
+
+    setTimeout(() => {
+        notificacion.remove();
+    }, 3000);
+} 
+
