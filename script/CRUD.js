@@ -143,6 +143,7 @@ function mostrarProductos(productos) {
 
     productos.forEach(producto => {
         const row = document.createElement('tr');
+        const precioFormateado = producto.fields.price ? Number(producto.fields.price).toLocaleString('es-AR') : '0';
         row.innerHTML = `
             <td>
                 <img src="${producto.fields.image || ''}" 
@@ -151,7 +152,7 @@ function mostrarProductos(productos) {
                      onerror="this.src='../img/Defecto.webp';">
             </td>
             <td>${producto.fields.name || 'Sin nombre'}</td>
-            <td>$${(producto.fields.price || 0).toFixed(2)}</td>
+            <td>$${precioFormateado}</td>
             <td>
                 <button onclick="editarProducto('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')" class="btn-editar">
                     Editar
