@@ -117,3 +117,26 @@ async function eliminarProducto(id) {
     
     return true;
 }
+async function cargarProductos() {
+    try {
+        const productos = await obtenerProductos();
+        mostrarProductos(productos);
+    } catch (error) {
+        mostrarMensaje('Error al cargar productos: ' + error.message, 'error');
+        mostrarProductos([]);
+    }
+}
+
+function mostrarProductos(productos) {
+    productosTbody.innerHTML = '';
+    
+    if (productos.length === 0) {
+        productosTbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 20px;">
+                    No hay productos. ¡Agrega el primero!
+                </td>
+            </tr>
+        `;
+        return;
+    }
