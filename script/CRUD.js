@@ -140,3 +140,27 @@ function mostrarProductos(productos) {
         `;
         return;
     }
+
+    productos.forEach(producto => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <img src="${producto.fields.image || ''}" 
+                     alt="${producto.fields.name || 'Producto'}" 
+                     class="producto-imagen"
+                     onerror="this.src='../img/Defecto.webp';">
+            </td>
+            <td>${producto.fields.name || 'Sin nombre'}</td>
+            <td>$${(producto.fields.price || 0).toFixed(2)}</td>
+            <td>
+                <button onclick="editarProducto('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')" class="btn-editar">
+                    Editar
+                </button>
+                <button onclick="eliminarProductoConfirmado('${producto.id}')" class="btn-eliminar">
+                    Eliminar
+                </button>
+            </td>
+        `;
+        productosTbody.appendChild(row);
+    });
+}
