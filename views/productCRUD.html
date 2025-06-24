@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../styles/crudStyle.css.css">
+  <title>Agregar Producto</title>
+</head>
+<body>
+
+  <h1>Agregar Producto</h1>
+
+  <form id="form-producto">
+    <label>
+      Nombre:
+      <input type="text" id="nombre" required>
+    </label>
+    <label>
+      Precio:
+      <input type="number" id="precio" required>
+    </label>
+    <label>
+      Imagen (URL):
+      <input type="text" id="imagen" required>
+    </label>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <div class="mensaje" id="mensaje"></div>
+
+  <script src="../script/CRUD.js"></script>
+</body>
+</html>
