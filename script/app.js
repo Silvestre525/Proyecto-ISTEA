@@ -1,3 +1,17 @@
+const API_TOKEN = 'patwoVw3hjJjcX59Y.e9034fb6bcb1a67705ec0d72668c0cf4c404c9f96298439d22c807c077ef3468';
+const BASE_ID = 'app8grixPLzalw8ra';
+const TABLE_NAME = 'TableProducts';
+const AIRTABLE_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
+
+const productosContainer = document.getElementById('productos');
+
+
+
+
+
+
+
+//Menu hamburger
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.getElementById('mobile-menu');
     const navbar = document.querySelector('.navbar');
