@@ -56,3 +56,19 @@ async function guardarProducto(e) {
     }
 }
 
+async function crearProducto(producto) {
+    const response = await fetch(AIRTABLE_URL, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${API_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(producto)
+    });
+    
+    if (!response.ok) {
+        throw new Error('Error al crear producto');
+    }
+    
+    return await response.json();
+}
