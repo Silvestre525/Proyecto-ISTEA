@@ -188,3 +188,27 @@ async function eliminarProductoConfirmado(id) {
         }
     }
 }
+
+function cancelarEdicion() {
+    editandoId = null;
+    limpiarFormulario();
+}
+
+function limpiarFormulario() {
+    form.reset();
+    editandoId = null;
+    
+    formTitle.textContent = 'Agregar Nuevo Producto';
+    submitBtn.textContent = 'Guardar Producto';
+    cancelarBtn.style.display = 'none';
+}
+
+function mostrarMensaje(texto, tipo) {
+    mensaje.textContent = texto;
+    mensaje.className = `mensaje ${tipo}`;
+    
+    setTimeout(() => {
+        mensaje.textContent = '';
+        mensaje.className = 'mensaje';
+    }, 3000);
+}
