@@ -103,12 +103,36 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
     } else {
         carrito.push(producto);
     }
-    
+
     localStorage.setItem('carrito', JSON.stringify(carrito));
     actualizarContadorCarrito();
     
     mostrarNotificacion('Producto agregado al carrito');
 }
+
+function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const totalItems = carrito.reduce((total, item) => total + item.quantity, 0);
+    
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        cartCount.textContent = totalItems;
+    }
+}
+
+function mostrarNotificacion(mensaje) {
+    const notificacion = document.createElement('div');
+    notificacion.className = 'notificacion';
+    notificacion.textContent = mensaje;
+    
+    document.body.appendChild(notificacion);
+    
+    setTimeout(() => {
+        notificacion.remove();
+    }, 3000);
+}
+
+actualizarContadorCarrito(); 
 
 
 //Menu hamburger
