@@ -72,3 +72,17 @@ async function crearProducto(producto) {
     
     return await response.json();
 }
+async function obtenerProductos() {
+    const response = await fetch(AIRTABLE_URL, {
+        headers: {
+            'Authorization': `Bearer ${API_TOKEN}`
+        }
+    });
+    
+    if (!response.ok) {
+        throw new Error('Error al obtener productos');
+    }
+    
+    const data = await response.json();
+    return data.records || [];
+}
