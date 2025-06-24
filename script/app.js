@@ -9,6 +9,8 @@ let todosLosProductos = [];
 document.addEventListener('DOMContentLoaded', function() {
     cargarProductos();
     configurarBuscador();
+    actualizarContadorCarrito();
+    configurarEventosIndex();
 });
 
 function configurarBuscador() {
@@ -176,7 +178,6 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
 function actualizarContadorCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const totalItems = carrito.reduce((total, item) => total + item.quantity, 0);
-    
     const cartCount = document.querySelector('.cart-count');
     if (cartCount) {
         cartCount.textContent = totalItems;
@@ -195,8 +196,9 @@ function mostrarNotificacion(mensaje) {
     }, 3000);
 }
 
-actualizarContadorCarrito(); 
-
+function configurarEventosIndex() {
+    console.log('Eventos del index configurados');
+}
 
 //Menu hamburger
 document.addEventListener('DOMContentLoaded', function() {
