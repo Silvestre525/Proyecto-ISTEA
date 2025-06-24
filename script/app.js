@@ -101,6 +101,7 @@ function mostrarProductos(productos) {
     }
     
     productos.forEach(producto => {
+        const precioFormateado = producto.fields.price ? Number(producto.fields.price).toLocaleString('es-AR') : '0';
         const productoHTML = `
             <article class="product-item" onclick="irADetalle('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')">
                 <figure class="product-item__img">
@@ -110,7 +111,7 @@ function mostrarProductos(productos) {
                 </figure>
                 <div class="product-item__info">
                     <i class="fa-solid fa-truck"></i>
-                    <p class="info-price">$${(producto.fields.price || 0).toFixed(2)}</p>
+                    <p class="info-price">$${precioFormateado}</p>
                     <p class="info-discount">20% OFF</p>
                 </div>
                 <div class="product-item__title">
