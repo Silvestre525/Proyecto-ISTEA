@@ -5,53 +5,54 @@ const AIRTABLE_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
 
 const form = document.getElementById('form-producto');
 const mensaje = document.getElementById('mensaje');
+const productosTbody = document.getElementById('productos-tbody');
+const formTitle = document.getElementById('form-title');
+const submitBtn = document.getElementById('submit-btn');
+const cancelarBtn = document.getElementById('cancelar-edicion');
 
-form.addEventListener('submit', async function (e) {
-  e.preventDefault();
+let editandoId = null;
 
-  const nombre = document.getElementById('nombre').value;
-  const precio = parseFloat(document.getElementById('precio').value);
-  const imagen = document.getElementById('imagen').value;
-
-  if (!nombre || !precio || !imagen) {
-    mensaje.textContent = 'Todos los campos son obligatorios.';
-    mensaje.style.color = 'red';
-    return;
-  }
-
-  const producto = {
-    fields: {
-      name: nombre,
-      price: precio,
-      image: imagen
-    }
-  };
-
-  try {
-    const response = await fetch(AIRTABLE_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(producto)
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      mensaje.textContent = 'Producto agregado con éxito ';
-      mensaje.style.color = 'green';
-      form.reset();
-      console.log('Producto creado:', data);
-    } else {
-      console.error(data);
-      mensaje.textContent = 'Error al agregar producto: ' + data.error.message;
-      mensaje.style.color = 'red';
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    mensaje.textContent = 'Error al conectar con Airtable.';
-    mensaje.style.color = 'red';
-  }
+document.addEventListener('DOMContentLoaded', function() {
+    cargarProductos();
+    
+    form.addEventListener('submit', guardarProducto);
+    
+    cancelarBtn.addEventListener('click', cancelarEdicion);
 });
+
+async function guardarProducto(e) {
+    e.preventDefault();
+    
+    const nombre = document.getElementById('nombre').value;
+    const precio = parseFloat(document.getElementById('precio').value);
+    const imagen = document.getElementById('imagen').value;
+    
+    if (!nombre || !precio || !imagen) {
+        mostrarMensaje('Todos los campos son obligatorios', 'error');
+        return;
+    }
+    
+    const producto = {
+        fields: {
+            name: nombre,
+            price: precio,
+            image: imagen
+        }
+    };
+    
+    try {
+        if (editandoId) {
+            await actualizarProducto(editandoId, producto);
+            mostrarMensaje('Producto actualizado con éxito', 'success');
+        } else {
+            await crearProducto(producto);
+            mostrarMensaje('Producto agregado con éxito', 'success');
+        }
+        
+        limpiarFormulario();
+        cargarProductos();
+    } catch (error) {
+        mostrarMensaje('Error: ' + error.message, 'error');
+    }
+}
+
