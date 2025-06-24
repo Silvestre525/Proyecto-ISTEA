@@ -103,6 +103,13 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
     } else {
         carrito.push(producto);
     }
+    
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    
+    mostrarNotificacion('Producto agregado al carrito');
+}
+
 
 //Menu hamburger
 document.addEventListener('DOMContentLoaded', function() {
