@@ -24,7 +24,10 @@
             <a href="">Hombres</a>
             <a href="">Mujeres</a>
             <a href="">Marcas</a>
-            <a href="/views/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/views/carrito.html" class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </a>
         </nav>
     </header>
     <main>
@@ -32,26 +35,21 @@
             <h2>Detalles del Producto</h2>
             <div class="product-detail-content">
                 <div class="product-image">
-                    <img src="/img/zapatillas1.webp" alt="Zapatillas nike jordan 1" class="main-image">
-                    <div class="thumbnail-gallery">
-                        <img src="/img/zapatilla0.webp" alt="Imagen 1" class="thumbnail">
-                        <img src="/img/zapatillas2.webp" alt="Imagen 2" class="thumbnail">
-                        <img src="/img/zapatillas3.webp" alt="Imagen 3" class="thumbnail">
-                    </div>
+                    <img id="product-image" src="/img/Defecto.webp" alt="Producto" class="main-image">
                 </div>
                 <div class="product-info">
-                    <h3>Zapatillas nike jordan 1</h3>
-                    <p class="product-price">$200.000</p>
-                    <p class="product-description">Esta Zapatillas cuentan con un diseño muy cómodo, ideal para el día a día.</p>
+                    <h3 id="product-name">Cargando...</h3>
+                    <p class="product-price" id="product-price">$0</p>
+                    <p class="product-description" id="product-description">Descripción del producto</p>
                     <div class="product-options">
                         <div class="option-group">
                             <label for="size">Talla:</label>
                             <select id="size" name="size" required>
                                 <option value="">Selecciona una talla</option>
-                                <option value="s">39</option>
-                                <option value="m">40</option>
-                                <option value="l">41</option>
-                                <option value="xl">42</option>
+                                <option value="s">S</option>
+                                <option value="m">M</option>
+                                <option value="l">L</option>
+                                <option value="xl">XL</option>
                             </select>
                         </div>
                         <div class="option-group">
@@ -68,7 +66,7 @@
                             <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
                         </div>
                     </div>
-                    <button class="add-to-cart-button">Agregar al Carrito</button>
+                    <button class="add-to-cart-button" id="add-to-cart-btn">Agregar al Carrito</button>
                 </div>
             </div>
         </section>
@@ -82,10 +80,10 @@
             <div class="footer-section">
                 <h4>Enlaces Rápidos</h4>
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="index.html">Productos</a></li>
-                    <li><a href="index.html">Ofertas</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li><a href="/index.html">Productos</a></li>
+                    <li><a href="/index.html">Ofertas</a></li>
+                    <li><a href="/views/contact.html">Contacto</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -108,5 +106,6 @@
         </div>
     </footer>
     <script src="/script/app.js"></script>
+    <script src="/script/detalle.js"></script>
 </body>
 </html>
