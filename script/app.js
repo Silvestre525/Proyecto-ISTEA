@@ -5,7 +5,29 @@ const AIRTABLE_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
 
 const productosContainer = document.getElementById('productos');
 
+document.addEventListener('DOMContentLoaded', function() {
+    cargarProductos();
+});
 
+async function obtenerProductos() {
+    try {
+        const response = await fetch(AIRTABLE_URL, {
+            headers: {
+                'Authorization': `Bearer ${API_TOKEN}`
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Error al obtener productos');
+        }
+        
+        const data = await response.json();
+        return data.records || [];
+    } catch (error) {
+        console.error('Error:', error);
+        return [];
+    }
+}
 
 
 
