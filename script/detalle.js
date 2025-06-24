@@ -46,3 +46,25 @@ function cargarDetallesProducto() {
     };
 }
 
+function configurarBotonCarrito() {
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const sizeSelect = document.getElementById('size');
+    const colorSelect = document.getElementById('color');
+    const quantityInput = document.getElementById('quantity');
+
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function() {
+            
+            if (!sizeSelect.value || !colorSelect.value) {
+                alert('Por favor selecciona una talla y un color');
+                return;
+            }
+
+           
+            const quantity = parseInt(quantityInput.value) || 1;
+
+           
+            agregarAlCarritoDesdeDetalle(quantity);
+        });
+    }
+}
