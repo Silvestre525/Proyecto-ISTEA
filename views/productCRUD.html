@@ -2,30 +2,76 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/crudStyle.css">
-  <title>Agregar Producto</title>
+  <title>Gestión de Productos</title>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1>Gestión de Productos</h1>
+      <a href="index.html" class="volver-btn">← Volver al inicio</a>
+    </header>
 
-  <h1>Agregar Producto</h1>
+    <main>
+      <section class="form-section">
+        <h2 id="form-title"> Agregar Nuevo Producto</h2>
+        
+        <form id="form-producto">
+          <input type="hidden" id="producto-id">
+          
+          <div class="form-group">
+            <label for="nombre">Nombre del Producto:</label>
+            <input type="text" id="nombre" required placeholder="Ej: Remera Azul">
+          </div>
+          
+          <div class="form-group">
+            <label for="precio">Precio ($):</label>
+            <input type="number" id="precio" step="0.01" min="0" required placeholder="Ej: 25.99">
+          </div>
+          
+          <div class="form-group">
+            <label for="imagen">URL de la Imagen:</label>
+            <input type="text" id="imagen" required placeholder="/imagen.jpg">
+          </div>
+          
+          <div class="form-buttons">
+            <button type="submit" id="submit-btn">Guardar Producto</button>
+            <button type="button" id="cancelar-btn" style="display: none;">Cancelar</button>
+          </div>
+        </form>
+        
+        <div class="mensaje" id="mensaje"></div>
+      </section>
 
-  <form id="form-producto">
-    <label>
-      Nombre:
-      <input type="text" id="nombre" required>
-    </label>
-    <label>
-      Precio:
-      <input type="number" id="precio" required>
-    </label>
-    <label>
-      Imagen (URL):
-      <input type="text" id="imagen" required>
-    </label>
-    <button type="submit">Guardar</button>
-  </form>
-
-  <div class="mensaje" id="mensaje"></div>
+      <!-- Tabla de productos -->
+      <section class="table-section">
+        <h2>Lista de Productos</h2>
+        
+        <div class="table-container">
+          <table id="productos-table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="productos-tbody">
+              <!-- Carghare aquí dinámicamente los productos -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div id="loading" class="loading"> Cargando productos...</div>
+        <div id="no-products" class="no-products" style="display: none;">
+          <p> No hay productos en la base de datos</p>
+          <p>¡Agrega tu primer producto usando el formulario de arriba!</p>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script src="../script/CRUD.js"></script>
 </body>
