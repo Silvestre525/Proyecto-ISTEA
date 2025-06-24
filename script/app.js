@@ -135,7 +135,7 @@ function irADetalle(id, nombre, precio, imagen) {
         image: imagen
     });
     
-    // Redirigir a la página de detalles
+ 
     window.location.href = `/views/detalle.html?${params.toString()}`;
 }
 
