@@ -4,10 +4,47 @@ const TABLE_NAME = 'TableProducts';
 const AIRTABLE_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
 
 const productosContainer = document.getElementById('productos');
+let todosLosProductos = [];
 
 document.addEventListener('DOMContentLoaded', function() {
     cargarProductos();
+    configurarBuscador();
 });
+
+function configurarBuscador() {
+    const searchInput = document.querySelector('.search-bar input');
+    const searchButton = document.querySelector('.search-bar button');
+    
+    searchInput.addEventListener('input', function() {
+        filtrarProductos(this.value);
+    });
+    
+    searchButton.addEventListener('click', function() {
+        filtrarProductos(searchInput.value);
+    });
+    
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            filtrarProductos(this.value);
+        }
+    });
+}
+
+function filtrarProductos(texto) {
+    if (!texto || texto.trim() === '') {
+        mostrarProductos(todosLosProductos);
+        return;
+    }
+    
+    const textoBusqueda = texto.toLowerCase().trim();
+    const productosFiltrados = todosLosProductos.filter(producto => {
+        const nombre = (producto.fields.name || '').toLowerCase();
+        const precio = (producto.fields.price || 0).toString();
+        return nombre.includes(textoBusqueda) || precio.includes(textoBusqueda);
+    });
+    
+    mostrarProductos(productosFiltrados);
+}
 
 async function obtenerProductos() {
     try {
@@ -32,6 +69,7 @@ async function obtenerProductos() {
 async function cargarProductos() {
     try {
         const productos = await obtenerProductos();
+        todosLosProductos = productos;
         
         if (productos.length === 0) {
             mostrarProductosVacios();
@@ -47,6 +85,16 @@ async function cargarProductos() {
 
 function mostrarProductos(productos) {
     productosContainer.innerHTML = '';
+    
+    if (productos.length === 0) {
+        productosContainer.innerHTML = `
+            <div style="text-align: center; padding: 50px; color: #666;">
+                <h3>No se encontraron productos</h3>
+                <p>Intenta con otra búsqueda</p>
+            </div>
+        `;
+        return;
+    }
     
     productos.forEach(producto => {
         const productoHTML = `
