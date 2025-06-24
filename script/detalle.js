@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     cargarDetallesProducto();
     configurarBotonCarrito();
@@ -30,7 +29,8 @@ function cargarDetallesProducto() {
     }
 
     if (productPriceElement && productPrice) {
-        productPriceElement.textContent = `$${parseFloat(productPrice).toFixed(2)}`;
+        const precioFormateado = Number(productPrice).toLocaleString('es-AR');
+        productPriceElement.textContent = `$${precioFormateado}`;
     }
 
     if (productDescriptionElement) {
