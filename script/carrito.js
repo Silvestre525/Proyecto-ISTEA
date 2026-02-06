@@ -1,8 +1,30 @@
 class CarritoCompras {
     constructor() {
-        this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        const rawCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        this.carrito = this.validarYMigrar(rawCarrito);
+        this.guardarCarrito(); // Guardar la versión corregida inmediatamente
         this.total = 0;
         this.actualizarTotal();
+    }
+
+    validarYMigrar(items) {
+        if (!Array.isArray(items)) return [];
+        
+        return items.map(item => {
+            // Intenta obtener los valores en inglés, o usa los de español como fallback
+            const migratedItem = {
+                id: item.id || item._id || Date.now().toString(), // Fallback para ID si no existe
+                name: item.name || item.nombre || 'Producto sin nombre',
+                price: parseFloat(item.price !== undefined ? item.price : (item.precio !== undefined ? item.precio : 0)),
+                image: item.image || item.imagen || '/img/Defecto.webp',
+                quantity: parseInt(item.quantity !== undefined ? item.quantity : (item.cantidad !== undefined ? item.cantidad : 1))
+            };
+
+            return migratedItem;
+        }).filter(item => {
+            // Filtra productos inválidos (precio NaN o sin ID válido si fuera crítico)
+            return item.id && !isNaN(item.price);
+        });
     }
 
 
@@ -10,14 +32,14 @@ class CarritoCompras {
         const productoExistente = this.carrito.find(item => item.id === producto.id);
         
         if (productoExistente) {
-            productoExistente.cantidad += 1;
+            productoExistente.quantity += 1;
         } else {
             this.carrito.push({
                 id: producto.id,
-                nombre: producto.nombre,
-                precio: producto.precio,
-                imagen: producto.imagen,
-                cantidad: 1
+                name: producto.name,
+                price: producto.price,
+                image: producto.image,
+                quantity: 1
             });
         }
 
@@ -35,11 +57,11 @@ class CarritoCompras {
     }
 
     
-    actualizarCantidad(id, cantidad) {
+    actualizarCantidad(id, quantity) {
         const producto = this.carrito.find(item => item.id === id);
         if (producto) {
-            producto.cantidad = cantidad;
-            if (producto.cantidad <= 0) {
+            producto.quantity = quantity;
+            if (producto.quantity <= 0) {
                 this.eliminarProducto(id);
             }
         }
@@ -50,7 +72,7 @@ class CarritoCompras {
    
     actualizarTotal() {
         this.total = this.carrito.reduce((total, item) => {
-            return total + (item.precio * item.cantidad);
+            return total + (item.price * item.quantity);
         }, 0);
         this.actualizarContadorCarrito();
     }
@@ -82,7 +104,7 @@ class CarritoCompras {
     
     actualizarContadorCarrito() {
         const contador = document.querySelector('.cart-count');
-        const totalItems = this.carrito.reduce((total, item) => total + item.cantidad, 0);
+        const totalItems = this.carrito.reduce((total, item) => total + item.quantity, 0);
         
         if (contador) {
             contador.textContent = totalItems || '';
@@ -114,9 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (producto) {
                 const productoData = {
                     id: producto.dataset.id || Math.random().toString(36).substr(2, 9),
-                    nombre: producto.querySelector('.product-item__title h3').textContent,
-                    precio: parseFloat(producto.querySelector('.info-price').textContent.replace('$', '').replace('.', '')),
-                    imagen: producto.querySelector('.product-item__img img').src
+                    name: producto.querySelector('.product-item__title h3').textContent,
+                    price: parseFloat(producto.querySelector('.info-price').textContent.replace('$', '').replace('.', '')),
+                    image: producto.querySelector('.product-item__img img').src
                 };
                 window.carrito.agregarProducto(productoData);
             }

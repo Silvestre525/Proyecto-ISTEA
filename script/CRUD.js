@@ -1,7 +1,6 @@
-const API_TOKEN = 'patwoVw3hjJjcX59Y.e9034fb6bcb1a67705ec0d72668c0cf4c404c9f96298439d22c807c077ef3468';
-const BASE_ID = 'app8grixPLzalw8ra';
-const TABLE_NAME = 'TableProducts';
-const AIRTABLE_URL = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
+// La configuración se carga desde config.js
+// const AIRTABLE_URL está definido en config.js
+
 
 const form = document.getElementById('form-producto');
 const mensaje = document.getElementById('mensaje');
@@ -12,26 +11,26 @@ const cancelarBtn = document.getElementById('cancelar-btn');
 
 let editandoId = null;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     cargarProductos();
-    
+
     form.addEventListener('submit', guardarProducto);
-    
+
     cancelarBtn.addEventListener('click', cancelarEdicion);
 });
 
 async function guardarProducto(e) {
     e.preventDefault();
-    
+
     const nombre = document.getElementById('nombre').value;
     const precio = parseFloat(document.getElementById('precio').value);
     const imagen = document.getElementById('imagen').value;
-    
+
     if (!nombre || !precio || !imagen) {
         mostrarMensaje('Todos los campos son obligatorios', 'error');
         return;
     }
-    
+
     const producto = {
         fields: {
             name: nombre,
@@ -39,7 +38,7 @@ async function guardarProducto(e) {
             image: imagen
         }
     };
-    
+
     try {
         if (editandoId) {
             await actualizarProducto(editandoId, producto);
@@ -48,7 +47,7 @@ async function guardarProducto(e) {
             await crearProducto(producto);
             mostrarMensaje('Producto agregado con éxito', 'success');
         }
-        
+
         limpiarFormulario();
         cargarProductos();
     } catch (error) {
@@ -65,24 +64,24 @@ async function crearProducto(producto) {
         },
         body: JSON.stringify(producto)
     });
-    
+
     if (!response.ok) {
         throw new Error('Error al crear producto');
     }
-    
+
     return await response.json();
 }
 async function obtenerProductos() {
     const response = await fetch(AIRTABLE_URL, {
         headers: {
-            'Authorization': `Bearer ${API_TOKEN}`
+            'Authorization': `Bearer ${CONFIG.API_TOKEN}`
         }
     });
-    
+
     if (!response.ok) {
         throw new Error('Error al obtener productos');
     }
-    
+
     const data = await response.json();
     return data.records || [];
 }
@@ -90,16 +89,16 @@ async function actualizarProducto(id, producto) {
     const response = await fetch(`${AIRTABLE_URL}/${id}`, {
         method: 'PATCH',
         headers: {
-            'Authorization': `Bearer ${API_TOKEN}`,
+            'Authorization': `Bearer ${CONFIG.API_TOKEN}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(producto)
     });
-    
+
     if (!response.ok) {
         throw new Error('Error al actualizar producto');
     }
-    
+
     return await response.json();
 }
 
@@ -107,14 +106,14 @@ async function eliminarProducto(id) {
     const response = await fetch(`${AIRTABLE_URL}/${id}`, {
         method: 'DELETE',
         headers: {
-            'Authorization': `Bearer ${API_TOKEN}`
+            'Authorization': `Bearer ${CONFIG.API_TOKEN}`
         }
     });
-    
+
     if (!response.ok) {
         throw new Error('Error al eliminar producto');
     }
-    
+
     return true;
 }
 async function cargarProductos() {
@@ -129,7 +128,7 @@ async function cargarProductos() {
 
 function mostrarProductos(productos) {
     productosTbody.innerHTML = '';
-    
+
     if (productos.length === 0) {
         productosTbody.innerHTML = `
             <tr>
@@ -168,11 +167,11 @@ function mostrarProductos(productos) {
 
 function editarProducto(id, nombre, precio, imagen) {
     editandoId = id;
-    
+
     document.getElementById('nombre').value = nombre;
     document.getElementById('precio').value = precio;
     document.getElementById('imagen').value = imagen;
-    
+
     formTitle.textContent = 'Editar Producto';
     submitBtn.textContent = 'Actualizar Producto';
     cancelarBtn.style.display = 'inline-block';
@@ -198,7 +197,7 @@ function cancelarEdicion() {
 function limpiarFormulario() {
     form.reset();
     editandoId = null;
-    
+
     formTitle.textContent = 'Agregar Nuevo Producto';
     submitBtn.textContent = 'Guardar Producto';
     cancelarBtn.style.display = 'none';
@@ -207,7 +206,7 @@ function limpiarFormulario() {
 function mostrarMensaje(texto, tipo) {
     mensaje.textContent = texto;
     mensaje.className = `mensaje ${tipo}`;
-    
+
     setTimeout(() => {
         mensaje.textContent = '';
         mensaje.className = 'mensaje';
