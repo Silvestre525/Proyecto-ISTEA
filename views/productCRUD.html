@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="../styles/crudStyle.css">
   <title>Gestión de Productos</title>
 </head>
@@ -46,7 +47,6 @@
         <div class="mensaje" id="mensaje"></div>
       </section>
 
-      <!-- Tabla de productos -->
       <section class="table-section">
         <h2>Lista de Productos</h2>
 
@@ -61,7 +61,6 @@
               </tr>
             </thead>
             <tbody id="productos-tbody">
-              <!-- Carghare aquí dinámicamente los productos -->
             </tbody>
           </table>
         </div>
@@ -76,6 +75,8 @@
   </div>
 
   <script src="/script/config.js"></script>
+  <script src="/script/utils.js"></script>
+  <script src="/script/api.js"></script>
   <script src="../script/CRUD.js"></script>
 </body>
 

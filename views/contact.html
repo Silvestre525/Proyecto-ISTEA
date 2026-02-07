@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/contactStyle.css">
     <link rel="icon" href="/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Document</title>
+    <title>Contacto - Tienda de Ropa</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -24,7 +27,10 @@
             <a href="">Hombres</a>
             <a href="">Mujeres</a>
             <a href="/index.html">Inicio</a>
-            <a href="/views/carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/views/carrito.html" class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </a>
         </nav>
     </header>
     <main>
@@ -38,15 +44,18 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required placeholder="info@tiendaropa.com" aria-label="Email">
+                        <input type="email" id="email" name="email" required placeholder="info@tiendaropa.com"
+                            aria-label="Email">
                     </div>
                     <div class="form-group">
                         <label for="subject">Asunto:</label>
-                        <input type="text" id="subject" name="subject" required placeholder="Motivo del contacto" aria-label="Asunto">
+                        <input type="text" id="subject" name="subject" required placeholder="Motivo del contacto"
+                            aria-label="Asunto">
                     </div>
                     <div class="form-group">
                         <label for="message">Mensaje:</label>
-                        <textarea id="message" name="message" required placeholder="Escribe tu mensaje..." rows="5" aria-label="Mensaje"></textarea>
+                        <textarea id="message" name="message" required placeholder="Escribe tu mensaje..." rows="5"
+                            aria-label="Mensaje"></textarea>
                     </div>
                     <button type="submit" class="submit-button">Enviar Mensaje</button>
                 </form>
@@ -91,6 +100,8 @@
             <p>&copy; 2025 Tienda de Ropa. Todos los derechos reservados.</p>
         </div>
     </footer>
-    <script src="/script/app.js"></script>
+    <script src="/script/utils.js"></script>
+    <script src="/script/carrito.js"></script>
 </body>
+
 </html>
