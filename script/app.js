@@ -1,20 +1,89 @@
-// La configuración se carga desde config.js
-// const AIRTABLE_URL está definido en config.js
-
-
 const productosContainer = document.getElementById('productos');
 let todosLosProductos = [];
 
 document.addEventListener('DOMContentLoaded', function () {
     cargarProductos();
     configurarBuscador();
-    actualizarContadorCarrito();
-    configurarEventosIndex();
 });
+
+async function cargarProductos() {
+    try {
+        if (typeof API === 'undefined') {
+            console.error('API no cargada');
+            return;
+        }
+
+        const productos = await API.obtenerProductos();
+        todosLosProductos = productos;
+
+        if (productos.length === 0) {
+            mostrarProductosVacios();
+            return;
+        }
+
+        mostrarProductos(productos);
+    } catch (error) {
+        console.error('Error al cargar productos:', error);
+        mostrarProductosVacios();
+    }
+}
+
+function mostrarProductos(productos) {
+    if (!productosContainer) return;
+
+    productosContainer.innerHTML = '';
+
+    if (productos.length === 0) {
+        productosContainer.innerHTML = `
+            <div style="text-align: center; padding: 50px; color: #666;">
+                <h3>No se encontraron productos</h3>
+                <p>Intenta con otra búsqueda</p>
+            </div>
+        `;
+        return;
+    }
+
+    productos.forEach(producto => {
+        const precioFormateado = Utils.formatearPrecio(producto.fields.price || 0);
+        const prodData = {
+            id: producto.id,
+            name: producto.fields.name || '',
+            price: producto.fields.price || 0,
+            image: producto.fields.image || ''
+        };
+
+        const productoHTML = `
+            <article class="product-item" onclick="irADetalle('${prodData.id}', '${prodData.name.replace(/'/g, "\\'")}', ${prodData.price}, '${prodData.image}')">
+                <figure class="product-item__img">
+                    <img src="${prodData.image || '/img/Defecto.webp'}" 
+                         alt="${prodData.name || 'Producto'}"
+                         onerror="this.src='/img/Defecto.webp';">
+                </figure>
+                <div class="product-item__info">
+                    <i class="fa-solid fa-truck"></i>
+                    <p class="info-price">${precioFormateado}</p>
+                    <p class="info-discount">20% OFF</p>
+                </div>
+                <div class="product-item__title">
+                    <h3>${prodData.name}</h3>
+                </div>
+                <div class="product-item__button">
+                    <button class="buy-button" onclick="event.stopPropagation(); agregarAlCarritoDesdeHTML('${prodData.id}', '${prodData.name.replace(/'/g, "\\'")}', ${prodData.price}, '${prodData.image}')">
+                        Agregar al carrito
+                    </button>
+                </div>
+            </article>
+        `;
+
+        productosContainer.innerHTML += productoHTML;
+    });
+}
 
 function configurarBuscador() {
     const searchInput = document.querySelector('.search-bar input');
     const searchButton = document.querySelector('.search-bar button');
+
+    if (!searchInput || !searchButton) return;
 
     searchInput.addEventListener('input', function () {
         filtrarProductos(this.value);
@@ -47,100 +116,6 @@ function filtrarProductos(texto) {
     mostrarProductos(productosFiltrados);
 }
 
-async function obtenerProductos() {
-    try {
-        const response = await fetch(AIRTABLE_URL, {
-            headers: {
-                'Authorization': `Bearer ${CONFIG.API_TOKEN}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al obtener productos');
-        }
-
-        const data = await response.json();
-        return data.records || [];
-    } catch (error) {
-        console.error('Error:', error);
-        return [];
-    }
-}
-
-async function cargarProductos() {
-    try {
-        const productos = await obtenerProductos();
-        todosLosProductos = productos;
-
-        if (productos.length === 0) {
-            mostrarProductosVacios();
-            return;
-        }
-
-        mostrarProductos(productos);
-    } catch (error) {
-        console.error('Error al cargar productos:', error);
-        mostrarProductosVacios();
-    }
-}
-
-function mostrarProductos(productos) {
-    if (!productosContainer) return;
-
-    productosContainer.innerHTML = '';
-
-    if (productos.length === 0) {
-        productosContainer.innerHTML = `
-            <div style="text-align: center; padding: 50px; color: #666;">
-                <h3>No se encontraron productos</h3>
-                <p>Intenta con otra búsqueda</p>
-            </div>
-        `;
-        return;
-    }
-
-    productos.forEach(producto => {
-        const precioFormateado = producto.fields.price ? Number(producto.fields.price).toLocaleString('es-AR') : '0';
-        const productoHTML = `
-            <article class="product-item" onclick="irADetalle('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')">
-                <figure class="product-item__img">
-                    <img src="${producto.fields.image || '/img/Defecto.webp'}" 
-                         alt="${producto.fields.name || 'Producto'}"
-                         onerror="this.src='/img/Defecto.webp';">
-                </figure>
-                <div class="product-item__info">
-                    <i class="fa-solid fa-truck"></i>
-                    <p class="info-price">$${precioFormateado}</p>
-                    <p class="info-discount">20% OFF</p>
-                </div>
-                <div class="product-item__title">
-                    <h3>${producto.fields.name || 'Sin nombre'}</h3>
-                </div>
-                <div class="product-item__button">
-                    <button class="buy-button" onclick="event.stopPropagation(); agregarAlCarrito('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')">
-                        Agregar al carrito
-                    </button>
-                </div>
-            </article>
-        `;
-
-        productosContainer.innerHTML += productoHTML;
-    });
-}
-
-function irADetalle(id, nombre, precio, imagen) {
-
-    const params = new URLSearchParams({
-        id: id,
-        name: nombre,
-        price: precio,
-        image: imagen
-    });
-
-
-    window.location.href = `/views/detalle.html?${params.toString()}`;
-}
-
 function mostrarProductosVacios() {
     productosContainer.innerHTML = `
         <div style="text-align: center; padding: 50px; color: #666;">
@@ -150,90 +125,27 @@ function mostrarProductosVacios() {
     `;
 }
 
-function agregarAlCarrito(id, nombre, precio, imagen) {
-    const producto = {
+function agregarAlCarritoDesdeHTML(id, nombre, precio, imagen) {
+    if (window.carrito) {
+        window.carrito.agregarProducto({
+            id: id,
+            name: nombre,
+            price: precio,
+            image: imagen,
+            quantity: 1
+        });
+    } else {
+        console.error('El carrito no está inicializado');
+    }
+}
+
+function irADetalle(id, nombre, precio, imagen) {
+    const params = new URLSearchParams({
         id: id,
         name: nombre,
         price: precio,
-        image: imagen,
-        quantity: 1
-    };
-
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    const productoExistente = carrito.find(item => item.id === id);
-
-    if (productoExistente) {
-        productoExistente.quantity += 1;
-    } else {
-        carrito.push(producto);
-    }
-
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    actualizarContadorCarrito();
-
-    mostrarNotificacion('Producto agregado al carrito');
-}
-
-function actualizarContadorCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    const totalItems = carrito.reduce((total, item) => total + (parseInt(item.quantity) || 0), 0);
-    const cartCount = document.querySelector('.cart-count');
-    if (cartCount) {
-        cartCount.textContent = totalItems;
-    }
-}
-
-function mostrarNotificacion(mensaje) {
-    const notificacion = document.createElement('div');
-    notificacion.className = 'notificacion';
-    notificacion.textContent = mensaje;
-
-    document.body.appendChild(notificacion);
-
-    setTimeout(() => {
-        notificacion.remove();
-    }, 3000);
-}
-
-function configurarEventosIndex() {
-    console.log('Eventos del index configurados');
-}
-
-//Menu hamburger
-document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navbar = document.querySelector('.navbar');
-    const body = document.body;
-
-    function toggleMenu() {
-        mobileMenu.classList.toggle('active');
-        navbar.classList.toggle('active');
-        body.classList.toggle('menu-open');
-    }
-
-    mobileMenu.addEventListener('click', toggleMenu);
-
-    const navLinks = document.querySelectorAll('.navbar a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navbar.classList.contains('active')) {
-                toggleMenu();
-            }
-        });
+        image: imagen
     });
 
-    document.addEventListener('click', (e) => {
-        if (navbar.classList.contains('active') &&
-            !navbar.contains(e.target) &&
-            !mobileMenu.contains(e.target)) {
-            toggleMenu();
-        }
-    });
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && navbar.classList.contains('active')) {
-            toggleMenu();
-        }
-    });
-});
+    window.location.href = `/views/detalle.html?${params.toString()}`;
+}

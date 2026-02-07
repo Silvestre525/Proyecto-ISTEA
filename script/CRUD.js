@@ -1,7 +1,3 @@
-// La configuración se carga desde config.js
-// const AIRTABLE_URL está definido en config.js
-
-
 const form = document.getElementById('form-producto');
 const mensaje = document.getElementById('mensaje');
 const productosTbody = document.getElementById('productos-tbody');
@@ -15,9 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
     cargarProductos();
 
     form.addEventListener('submit', guardarProducto);
-
     cancelarBtn.addEventListener('click', cancelarEdicion);
 });
+
+async function cargarProductos() {
+    try {
+        const productos = await API.obtenerProductos();
+        mostrarProductos(productos);
+    } catch (error) {
+        mostrarMensaje('Error al cargar productos: ' + error.message, 'error');
+        mostrarProductos([]);
+    }
+}
 
 async function guardarProducto(e) {
     e.preventDefault();
@@ -41,10 +46,10 @@ async function guardarProducto(e) {
 
     try {
         if (editandoId) {
-            await actualizarProducto(editandoId, producto);
+            await API.actualizarProducto(editandoId, producto);
             mostrarMensaje('Producto actualizado con éxito', 'success');
         } else {
-            await crearProducto(producto);
+            await API.crearProducto(producto);
             mostrarMensaje('Producto agregado con éxito', 'success');
         }
 
@@ -52,77 +57,6 @@ async function guardarProducto(e) {
         cargarProductos();
     } catch (error) {
         mostrarMensaje('Error: ' + error.message, 'error');
-    }
-}
-
-async function crearProducto(producto) {
-    const response = await fetch(AIRTABLE_URL, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${API_TOKEN}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(producto)
-    });
-
-    if (!response.ok) {
-        throw new Error('Error al crear producto');
-    }
-
-    return await response.json();
-}
-async function obtenerProductos() {
-    const response = await fetch(AIRTABLE_URL, {
-        headers: {
-            'Authorization': `Bearer ${CONFIG.API_TOKEN}`
-        }
-    });
-
-    if (!response.ok) {
-        throw new Error('Error al obtener productos');
-    }
-
-    const data = await response.json();
-    return data.records || [];
-}
-async function actualizarProducto(id, producto) {
-    const response = await fetch(`${AIRTABLE_URL}/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'Authorization': `Bearer ${CONFIG.API_TOKEN}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(producto)
-    });
-
-    if (!response.ok) {
-        throw new Error('Error al actualizar producto');
-    }
-
-    return await response.json();
-}
-
-async function eliminarProducto(id) {
-    const response = await fetch(`${AIRTABLE_URL}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${CONFIG.API_TOKEN}`
-        }
-    });
-
-    if (!response.ok) {
-        throw new Error('Error al eliminar producto');
-    }
-
-    return true;
-}
-async function cargarProductos() {
-    try {
-        const productos = await obtenerProductos();
-        mostrarProductos(productos);
-    } catch (error) {
-        mostrarMensaje('Error al cargar productos: ' + error.message, 'error');
-        mostrarProductos([]);
     }
 }
 
@@ -142,7 +76,13 @@ function mostrarProductos(productos) {
 
     productos.forEach(producto => {
         const row = document.createElement('tr');
-        const precioFormateado = producto.fields.price ? Number(producto.fields.price).toLocaleString('es-AR') : '0';
+        const precioFormateado = Utils.formatearPrecio(producto.fields.price);
+
+        const pId = producto.id;
+        const pName = (producto.fields.name || '').replace(/'/g, "\\'");
+        const pPrice = producto.fields.price || 0;
+        const pImg = (producto.fields.image || '').replace(/'/g, "\\'");
+
         row.innerHTML = `
             <td>
                 <img src="${producto.fields.image || ''}" 
@@ -151,12 +91,12 @@ function mostrarProductos(productos) {
                      onerror="this.src='../img/Defecto.webp';">
             </td>
             <td>${producto.fields.name || 'Sin nombre'}</td>
-            <td>$${precioFormateado}</td>
+            <td>${precioFormateado}</td>
             <td>
-                <button onclick="editarProducto('${producto.id}', '${producto.fields.name || ''}', ${producto.fields.price || 0}, '${producto.fields.image || ''}')" class="btn-editar">
+                <button onclick="editarProducto('${pId}', '${pName}', ${pPrice}, '${pImg}')" class="btn-editar">
                     Editar
                 </button>
-                <button onclick="eliminarProductoConfirmado('${producto.id}')" class="btn-eliminar">
+                <button onclick="eliminarProductoConfirmado('${pId}')" class="btn-eliminar">
                     Eliminar
                 </button>
             </td>
@@ -180,7 +120,7 @@ function editarProducto(id, nombre, precio, imagen) {
 async function eliminarProductoConfirmado(id) {
     if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
         try {
-            await eliminarProducto(id);
+            await API.eliminarProducto(id);
             mostrarMensaje('Producto eliminado con éxito', 'success');
             cargarProductos();
         } catch (error) {
