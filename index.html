@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="icon" href="/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Indumentaria</title>
 </head>
+
 <body class="index-fixed-header">
     <header class="header-fixed">
         <div id="logo" class="logo">
@@ -22,8 +25,8 @@
         </div>
         <nav class="navbar">
             <div class="search-bar">
-              <input type="text" placeholder="Buscar..">
-              <button type="submit"><i class="fa fa-search"></i></button>
+                <input type="text" placeholder="Buscar..">
+                <button type="submit"><i class="fa fa-search"></i></button>
             </div>
             <a href="">Hombres</a>
             <a href="">Mujeres</a>
@@ -43,9 +46,8 @@
     </section>
     <main>
         <section id="productos" class="container-items">
-            <!-- Los productos se cargarán dinámicamente aquí -->
         </section>
-        
+
         <div class="admin-access">
             <a href="/views/productCRUD.html" class="admin-btn">
                 <i class="fa-solid fa-cog"></i>
@@ -86,9 +88,12 @@
             <p>&copy; 2025 Tienda de Ropa. Todos los derechos reservados.</p>
         </div>
     </footer>
+
     <script src="/script/config.js"></script>
-    <script src="/script/app.js"></script>
+    <script src="/script/utils.js"></script>
+    <script src="/script/api.js"></script>
     <script src="/script/carrito.js"></script>
-    <script src="/script/index.js"></script>
+    <script src="/script/app.js"></script>
 </body>
+
 </html>
