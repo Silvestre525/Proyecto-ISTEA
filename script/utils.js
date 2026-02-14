@@ -57,7 +57,7 @@ const Utils = {
                     background-color: #4CAF50;
                     color: white;
                     padding: 15px 20px;
-                    border-radius: 5px;
+                    border-radius: 10px;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                     z-index: 2000;
                     animation: slideIn 0.3s ease-out;
